@@ -12,7 +12,7 @@ stack_t *Create(size_t );
 /* add member */
 void Push(stack_t *, void *);
 
-/* get and remove the first member */
+/* remove the first member */
 void Pop(stack_t *);
 
 /* get the first member */

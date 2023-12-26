@@ -5,38 +5,17 @@
 
 void TestCreate();
 void TestPush();
+void TestPop();
+void TestPeek();
 
 int main()
 {	
     TestCreate();
-	/*size_t capacity = 8;
-	int x = 10;
-	int y = 20;
-	int z = 30;
-	size_t size1 = 0;
-	size_t capacity1 = 0;
-	struct stack *Stack = StackCreate(capacity);
-	 
-	StackPush(Stack, &x);
-    StackPush(Stack, &y);
-    StackPush(Stack, &z);
-    
-    printf("%d peek from stack\n", *(int*)StackPeek(Stack));
-    
-    size1 = StackSize(Stack);
-  	printf("%ld the size \n",size1);
-  	
-    StackPop(Stack);
-    
-    printf("%d peek from stack\n", *(int*)StackPeek(Stack));
-  
-  	size1 = StackSize(Stack);
-  	printf("%ld the size \n",size1);
-   
-   	capacity1 = StackCapacity(Stack);
-	printf("%ld the capacity \n",capacity1);
-
-	StackDestroy(Stack);*/
+    TestPush();
+    TestPop();
+    TestPeek();
+    printf("The Tests Passed\n");
+	
 	return 0;
 }
 
@@ -45,9 +24,70 @@ void TestCreate()
     size_t capacity = 8;
     stack_t* stack = Create(capacity);
     assert(stack != NULL);
+    Destroy(stack);
 }
 
 void TestPush()
 {
-    
+    size_t capacity = 8;
+    stack_t* stack = Create(capacity);
+    assert(GetSize(stack) == 0);
+    int x = 10;
+	int y = 20;
+	int z = 30;
+    Push(stack, &x);
+    Push(stack, &y);
+    Push(stack, &z);
+    assert(GetSize(stack) == 3);
+    Destroy(stack);
+}
+
+void TestPop()
+{
+    size_t capacity = 8;
+    stack_t* stack = Create(capacity);
+    assert(GetSize(stack) == 0);
+    int x = 10;
+	int y = 20;
+	int z = 30;
+    Push(stack, &x);
+    Push(stack, &y);
+    Push(stack, &z);
+    assert(GetSize(stack) == 3);
+
+    Pop(stack);
+    assert(GetSize(stack) == 2);
+
+    Pop(stack);
+    assert(GetSize(stack) == 1);
+
+    Pop(stack);
+    assert(GetSize(stack) == 0);
+
+    Destroy(stack);
+}
+
+void TestPeek()
+{
+    size_t capacity = 8;
+    stack_t* stack = Create(capacity);
+    int* p = NULL;
+    assert(GetSize(stack) == 0);
+    int x = 10;
+	int y = 20;
+	int z = 30;
+    Push(stack, &x);
+    Push(stack, &y);
+    Push(stack, &z);
+    assert(GetSize(stack) == 3);
+
+    p = (int*)Peek(stack);
+    assert(*p == 30);
+    Pop(stack);
+
+    p = (int*)Peek(stack);
+    assert(*p == 20);
+    assert(GetSize(stack) == 2);
+
+    Destroy(stack);
 }
